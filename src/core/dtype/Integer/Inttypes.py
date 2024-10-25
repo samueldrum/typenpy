@@ -2,7 +2,6 @@
 
 
 from core.memories import BitLimits
-from core.dtype.vector.vector_for_Int import Vector
 
 # core.erros has the error messages
 from core.errors import (
@@ -117,6 +116,14 @@ class Int():
         else:
             raise NotIntError
         
+    def __floordiv__(self, other):
+        if isinstance(other, int):
+            return Int(self.value // other)
+        elif isinstance(other, Int):
+            return Int(self.value // other.value)
+        else:
+            raise NotIntError
+        
     def transformInBinary(self):
         binary = bin(self.value)[2:]
 
@@ -138,6 +145,9 @@ class Int():
             for elem in other:
                 list.append(elem * self.value)
         return Int(list)
+    
+    def to_py_int(self):
+        return int(self.value)
         
     
     def __repr__(self) -> str:
@@ -323,7 +333,7 @@ class Int512(Int):
     -2^511 to 2^511 - 1, which are the limits for signed 512-bit integers.
 
     """
-    def __ini__(self, value):
+    def __init__(self, value):
         if not (bitlmt.T512_MIN_SIG <= value <= bitlmt.T512_MAX_SIG):
             raise BiggerOrLowerNumberError
         self.value = value & bitlmt.T512_MAX_SIG

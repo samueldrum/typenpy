@@ -7,6 +7,7 @@ __all__ = ["Vector"]
 
 class Vector:
     def __init__(self, data, dtype=Int, filter=None):
+        self.filter = filter
         self.dtype = dtype
         self.data_list = []
         self.result_list = []
@@ -94,6 +95,7 @@ class Vector:
                 self.result_list.append(vec1 // vec2)
         return self.result_list
 
+
     def __getitem__(self, index):
         return self.data[index]
     
@@ -109,9 +111,23 @@ class Vector:
 
     def __len__(self):
         return len(self.data)
+    
+
+    def sum(self) -> Int:
+        count = Int(0)
+        for elem in self.data:
+            count += elem
+        
+        return count
+    
+
+
 
 
     def __repr__(self) -> str:
+        if self.filter == "rev":
+            ...
+
         return f"Vector({self.data})"
 
 
