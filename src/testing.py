@@ -1,8 +1,9 @@
-from typenpy import u2, u4, u8, u16, u32, u64, u128, u512
+from typenpy.Int import u2, u4, u8, u16, u32, u64, u128, u512, i64
+from typenpy.Vector import Vector
 
 
-numro1 = u8(6)
-lista = [5, 4, 6, 3]
+lista = i64(3)
+lista2 = Vector([2, 4, -3, 53], dtype=i64)
 
-result = numro1 + lista
-print(result * 3)
+
+print(lista2)
